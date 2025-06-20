@@ -80,7 +80,6 @@ const ShopifyStorefront = () => {
         color="#0A192F"
         anchorX="center"
         anchorY="middle"
-        font="/fonts/inter-bold.woff"
       >
         SHOPIFY
       </Text>
