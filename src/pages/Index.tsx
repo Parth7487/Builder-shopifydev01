@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Preloader from "../components/Preloader";
-import RippleBackground from "../components/RippleBackground";
+import ScrollProgress from "../components/ScrollProgress";
 import CinematicNavigation from "../components/sections/CinematicNavigation";
 import CinematicHero from "../components/sections/CinematicHero";
 import EnhancedServices from "../components/sections/EnhancedServices";
@@ -40,8 +40,8 @@ const Index = () => {
       {/* Main application */}
       {isLoaded && (
         <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
-          {/* Full-page ripple effect */}
-          <RippleBackground />
+          {/* Scroll progress bar */}
+          <ScrollProgress />
 
           {/* Navigation */}
           <CinematicNavigation />
