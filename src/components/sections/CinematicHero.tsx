@@ -6,7 +6,7 @@ import {
   PerspectiveCamera,
   Float,
 } from "@react-three/drei";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import * as THREE from "three";
 
@@ -17,33 +17,37 @@ const FloatingStorefront = () => {
   useFrame((state) => {
     if (groupRef.current) {
       groupRef.current.rotation.y =
-        Math.sin(state.clock.elapsedTime * 0.2) * 0.1;
+        Math.sin(state.clock.elapsedTime * 0.15) * 0.08;
       groupRef.current.position.y =
-        Math.sin(state.clock.elapsedTime * 0.3) * 0.1;
+        Math.sin(state.clock.elapsedTime * 0.25) * 0.1;
     }
   });
 
   return (
-    <Float speed={1.5} rotationIntensity={0.1} floatIntensity={0.3}>
+    <Float speed={1} rotationIntensity={0.05} floatIntensity={0.2}>
       <group ref={groupRef}>
-        {/* Main screen */}
+        {/* Main screen with cinematic styling */}
         <mesh position={[0, 0, 0]}>
           <boxGeometry args={[4, 5, 0.1]} />
-          <meshStandardMaterial color="#0A0A0A" />
+          <meshStandardMaterial
+            color="#0A0A0A"
+            metalness={0.8}
+            roughness={0.2}
+          />
         </mesh>
 
         {/* Screen content */}
         <mesh position={[0, 0, 0.06]}>
           <boxGeometry args={[3.6, 4.6, 0.01]} />
-          <meshStandardMaterial color="#0D1117" />
+          <meshStandardMaterial color="#1B1B1F" />
         </mesh>
 
-        {/* Header with mint gradient */}
+        {/* Header with gold gradient */}
         <mesh position={[0, 1.8, 0.07]}>
           <boxGeometry args={[3.4, 0.6, 0.01]} />
           <meshStandardMaterial
-            color="#38F9D7"
-            emissive="#38F9D7"
+            color="#FFD580"
+            emissive="#FFD580"
             emissiveIntensity={0.3}
           />
         </mesh>
@@ -52,43 +56,43 @@ const FloatingStorefront = () => {
         {[-1.2, 0, 1.2].map((x, i) => (
           <mesh key={i} position={[x, 0.2, 0.07]}>
             <boxGeometry args={[0.8, 1.2, 0.01]} />
-            <meshStandardMaterial color="#ffffff" opacity={0.95} transparent />
+            <meshStandardMaterial color="#F2F2F2" opacity={0.95} transparent />
           </mesh>
         ))}
 
-        {/* CTA Button */}
+        {/* CTA Button with accent color */}
         <mesh position={[0, -1.5, 0.07]}>
           <boxGeometry args={[2, 0.5, 0.01]} />
           <meshStandardMaterial
-            color="#6B7EFF"
-            emissive="#6B7EFF"
-            emissiveIntensity={0.3}
+            color="#FF5E5B"
+            emissive="#FF5E5B"
+            emissiveIntensity={0.2}
           />
         </mesh>
 
-        {/* Floating elements around */}
-        <Float speed={2} rotationIntensity={1} floatIntensity={1}>
+        {/* Floating geometric elements */}
+        <Float speed={2} rotationIntensity={0.8} floatIntensity={1}>
           <mesh position={[-3, 2, 1]}>
-            <octahedronGeometry args={[0.2]} />
-            <meshStandardMaterial color="#38F9D7" wireframe />
+            <octahedronGeometry args={[0.15]} />
+            <meshStandardMaterial color="#FFD580" wireframe />
           </mesh>
         </Float>
 
-        <Float speed={3} rotationIntensity={0.5} floatIntensity={0.8}>
+        <Float speed={2.5} rotationIntensity={0.4} floatIntensity={0.6}>
           <mesh position={[3, -1, 0.5]}>
-            <sphereGeometry args={[0.15]} />
+            <sphereGeometry args={[0.12]} />
             <meshStandardMaterial
-              color="#6B7EFF"
-              emissive="#6B7EFF"
-              emissiveIntensity={0.2}
+              color="#FF5E5B"
+              emissive="#FF5E5B"
+              emissiveIntensity={0.3}
             />
           </mesh>
         </Float>
 
-        <Float speed={4} rotationIntensity={0.8} floatIntensity={1.2}>
+        <Float speed={3} rotationIntensity={0.6} floatIntensity={0.8}>
           <mesh position={[-2, -2, 1.5]}>
-            <boxGeometry args={[0.1, 0.1, 0.1]} />
-            <meshStandardMaterial color="#38F9D7" />
+            <boxGeometry args={[0.08, 0.08, 0.08]} />
+            <meshStandardMaterial color="#FFD580" metalness={1} roughness={0} />
           </mesh>
         </Float>
       </group>
@@ -96,8 +100,8 @@ const FloatingStorefront = () => {
   );
 };
 
-// Liquid Background Component
-const LiquidBackground = () => {
+// Cinematic ripple background effect
+const CinematicRippleBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const mouseRef = useRef({ x: 0, y: 0 });
   const timeRef = useRef(0);
@@ -116,54 +120,55 @@ const LiquidBackground = () => {
       canvas.height = window.innerHeight;
     };
 
-    const drawLiquidEffect = () => {
+    const drawCinematicWaves = () => {
       if (!ctx || !canvas) return;
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const time = timeRef.current * 0.001;
+      const time = timeRef.current * 0.0008;
       const mouseX = mouseRef.current.x / canvas.width;
       const mouseY = mouseRef.current.y / canvas.height;
 
-      // Create gradient background
+      // Create sophisticated gradient
       const gradient = ctx.createRadialGradient(
         canvas.width * mouseX,
         canvas.height * mouseY,
         0,
         canvas.width * mouseX,
         canvas.height * mouseY,
-        canvas.width * 0.8,
+        canvas.width * 0.6,
       );
 
-      gradient.addColorStop(0, "rgba(56, 249, 215, 0.1)");
-      gradient.addColorStop(0.3, "rgba(107, 126, 255, 0.05)");
+      gradient.addColorStop(0, "rgba(255, 213, 128, 0.08)");
+      gradient.addColorStop(0.4, "rgba(255, 94, 91, 0.04)");
       gradient.addColorStop(1, "rgba(10, 10, 10, 0)");
 
       ctx.fillStyle = gradient;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Draw flowing waves
-      for (let i = 0; i < 3; i++) {
+      // Draw elegant flowing waves
+      for (let i = 0; i < 4; i++) {
         ctx.beginPath();
         ctx.moveTo(0, canvas.height / 2);
 
-        for (let x = 0; x <= canvas.width; x += 20) {
-          const y =
-            canvas.height / 2 +
-            Math.sin((x * 0.01 + time + i * 2) * Math.PI) * 50 +
-            Math.sin((mouseX * 10 + time + i) * Math.PI) * 30;
-          ctx.lineTo(x, y);
+        for (let x = 0; x <= canvas.width; x += 15) {
+          const baseY = canvas.height / 2;
+          const waveY =
+            baseY +
+            Math.sin((x * 0.008 + time + i * 1.5) * Math.PI) * 40 +
+            Math.sin((mouseX * 8 + time + i * 0.7) * Math.PI) * 25;
+          ctx.lineTo(x, waveY);
         }
 
-        ctx.strokeStyle = `rgba(${i === 0 ? "56, 249, 215" : "107, 126, 255"}, ${
-          0.1 - i * 0.02
-        })`;
-        ctx.lineWidth = 2;
+        const alpha = 0.06 - i * 0.01;
+        const color = i % 2 === 0 ? "255, 213, 128" : "255, 94, 91";
+        ctx.strokeStyle = `rgba(${color}, ${alpha})`;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
       }
 
-      timeRef.current += 16.67; // ~60fps
-      animationFrame = requestAnimationFrame(drawLiquidEffect);
+      timeRef.current += 16.67;
+      animationFrame = requestAnimationFrame(drawCinematicWaves);
     };
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -174,7 +179,7 @@ const LiquidBackground = () => {
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
     window.addEventListener("mousemove", handleMouseMove);
-    drawLiquidEffect();
+    drawCinematicWaves();
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
@@ -195,9 +200,11 @@ const LiquidBackground = () => {
 };
 
 const CinematicHero = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 1000], [0, -200]);
-  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const y = useTransform(scrollY, [0, 1000], [0, -150]);
+  const opacity = useTransform(scrollY, [0, 500], [1, 0]);
+  const isInView = useInView(containerRef, { once: true });
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -208,159 +215,158 @@ const CinematicHero = () => {
 
   return (
     <motion.section
+      ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
       style={{ y, opacity }}
     >
-      {/* Base gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-navy to-black" />
+      {/* Cinematic base background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black via-charcoal to-graphite" />
 
-      {/* Liquid interactive background */}
-      <LiquidBackground />
+      {/* Interactive ripple background */}
+      <CinematicRippleBackground />
 
-      {/* Animated grid overlay */}
-      <div className="absolute inset-0 opacity-10">
+      {/* Subtle grain texture */}
+      <div className="absolute inset-0 cinematic-grain opacity-40" />
+
+      {/* Grid overlay with fade */}
+      <div className="absolute inset-0 opacity-[0.03]">
         <motion.div
           className="w-full h-full"
           style={{
-            backgroundImage: `linear-gradient(rgba(56,249,215,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(56,249,215,0.1) 1px, transparent 1px)`,
-            backgroundSize: "120px 120px",
+            backgroundImage: `linear-gradient(rgba(255,213,128,0.2) 1px, transparent 1px), linear-gradient(90deg, rgba(255,213,128,0.2) 1px, transparent 1px)`,
+            backgroundSize: "100px 100px",
           }}
           animate={{
             backgroundPosition: ["0% 0%", "100% 100%"],
           }}
           transition={{
-            duration: 30,
+            duration: 40,
             repeat: Infinity,
             ease: "linear",
           }}
         />
       </div>
 
-      {/* Floating geometric elements */}
+      {/* Floating ambient elements */}
       <motion.div
-        className="absolute top-32 left-16 w-16 h-16 border border-mint/30 rotate-45"
+        className="absolute top-40 left-20 w-20 h-20 border border-gold/20 rotate-45"
         animate={{
           rotate: [45, 225, 405],
-          scale: [1, 1.2, 1],
+          scale: [1, 1.1, 1],
         }}
-        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
       />
 
       <motion.div
-        className="absolute top-64 right-20 w-12 h-12 bg-violet/20 rounded-full"
+        className="absolute top-80 right-24 w-16 h-16 bg-accent/10 rounded-full"
         animate={{
-          y: [0, -40, 0],
-          scale: [1, 1.3, 1],
-          opacity: [0.2, 0.6, 0.2],
+          y: [0, -30, 0],
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.3, 0.1],
         }}
         transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-20 items-center">
-        {/* Left content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-24 items-center">
+        {/* Content side */}
         <motion.div
           className="text-center lg:text-left space-y-12"
-          initial={{ opacity: 0, x: -100 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1.2, delay: 0.5 }}
+          initial={{ opacity: 0, x: -80 }}
+          animate={isInView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 1.2, delay: 0.3 }}
         >
+          {/* Main headline with cinematic reveal */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.7 }}
+            initial={{ opacity: 0, y: 60 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 1, delay: 0.6 }}
           >
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-bold leading-tight tracking-tight">
+            <h1 className="text-6xl md:text-8xl lg:text-[7rem] font-bold leading-[0.9] tracking-tight">
               <motion.span
-                className="block text-white uppercase"
+                className="block text-gray-100 mb-2"
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.9 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 0.8 }}
               >
-                We Bring
+                WE BRING
               </motion.span>
               <motion.span
-                className="block bg-gradient-to-r from-mint via-mint/90 to-violet bg-clip-text text-transparent uppercase"
+                className="block text-gradient mb-2"
                 initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.1 }}
-                animate-style={{
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 1 }}
+              >
+                SHOPIFY
+              </motion.span>
+              <motion.span
+                className="block text-gray-100 mb-2"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 1.2 }}
+              >
+                DREAMS
+              </motion.span>
+              <motion.span
+                className="block text-gold"
+                initial={{ opacity: 0, y: 30 }}
+                animate={isInView ? { opacity: 1, y: 0 } : {}}
+                transition={{ duration: 0.8, delay: 1.4 }}
+                style={{
+                  textShadow: "0 0 30px rgba(255, 213, 128, 0.6)",
                 }}
               >
-                Shopify
-              </motion.span>
-              <motion.span
-                className="block text-white uppercase"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.3 }}
-              >
-                Dreams
-              </motion.span>
-              <motion.span
-                className="block text-mint uppercase"
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 1.5 }}
-                animate={{
-                  textShadow: [
-                    "0 0 20px rgba(56,249,215,0.5)",
-                    "0 0 40px rgba(56,249,215,0.8)",
-                    "0 0 20px rgba(56,249,215,0.5)",
-                  ],
-                }}
-                style={{ animationDuration: "3s", animationRepeat: "infinite" }}
-              >
-                to Life
+                TO LIFE
               </motion.span>
             </h1>
           </motion.div>
 
+          {/* Subtitle */}
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 max-w-2xl leading-relaxed font-light"
+            className="text-2xl md:text-3xl text-gray-300 max-w-2xl font-light leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1.7 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 1.6 }}
           >
             Custom Shopify themes built for{" "}
             <motion.span
-              className="text-mint font-semibold"
+              className="text-gold font-medium"
               animate={{
-                color: ["#38F9D7", "#6B7EFF", "#38F9D7"],
+                color: ["#FFD580", "#FF5E5B", "#FFD580"],
               }}
-              transition={{ duration: 4, repeat: Infinity }}
+              transition={{ duration: 5, repeat: Infinity }}
             >
               bold, growing brands
             </motion.span>
           </motion.p>
 
+          {/* CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row gap-8"
             initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 2 }}
+            animate={isInView ? { opacity: 1, y: 0 } : {}}
+            transition={{ duration: 0.8, delay: 1.8 }}
           >
             <motion.div
-              whileHover={{ scale: 1.05, y: -5 }}
+              whileHover={{ scale: 1.05, y: -8 }}
               whileTap={{ scale: 0.95 }}
               className="relative group"
             >
               <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-mint to-violet rounded-lg blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
+                className="absolute inset-0 bg-gradient-to-r from-gold to-accent rounded-xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-500"
                 animate={{
                   scale: [1, 1.05, 1],
                 }}
-                transition={{ duration: 3, repeat: Infinity }}
+                transition={{ duration: 4, repeat: Infinity }}
               />
               <Button
                 onClick={() => scrollToSection("contact")}
-                className="relative bg-gradient-to-r from-mint to-violet text-black hover:from-mint/90 hover:to-violet/90 font-bold text-lg px-12 py-4 rounded-lg overflow-hidden group tracking-wider uppercase"
+                className="relative bg-gradient-to-r from-gold to-accent text-black hover:from-gold/90 hover:to-accent/90 font-bold text-lg px-12 py-6 rounded-xl overflow-hidden group tracking-wide"
               >
-                <span className="relative z-10">Schedule a Call</span>
+                <span className="relative z-10">SCHEDULE A CALL</span>
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
                   initial={{ x: "-100%" }}
-                  whileHover={{ x: "100%" }}
+                  whileHover={{ x: "200%" }}
                   transition={{ duration: 0.8 }}
                 />
               </Button>
@@ -368,12 +374,12 @@ const CinematicHero = () => {
 
             <motion.button
               onClick={() => scrollToSection("work")}
-              className="text-mint border border-mint/40 hover:border-mint/80 px-8 py-4 rounded-lg transition-all duration-300 relative group font-medium tracking-wider uppercase"
-              whileHover={{ scale: 1.05, y: -5 }}
+              className="text-gray-200 border-2 border-gold/40 hover:border-gold/80 hover:text-gold px-10 py-6 rounded-xl transition-all duration-300 relative group font-medium tracking-wide"
+              whileHover={{ scale: 1.05, y: -8 }}
             >
-              <span className="relative z-10">View Our Work</span>
+              <span className="relative z-10">VIEW OUR WORK</span>
               <motion.div
-                className="absolute inset-0 bg-mint/5 rounded-lg"
+                className="absolute inset-0 bg-gold/5 rounded-xl"
                 initial={{ scale: 0 }}
                 whileHover={{ scale: 1 }}
                 transition={{ duration: 0.3 }}
@@ -382,32 +388,32 @@ const CinematicHero = () => {
           </motion.div>
         </motion.div>
 
-        {/* Right 3D content */}
+        {/* 3D Showcase side */}
         <motion.div
-          className="relative h-[600px] lg:h-[700px]"
+          className="relative h-[600px] lg:h-[750px]"
           initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
-          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
-          transition={{ duration: 1.5, delay: 1 }}
+          animate={isInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
+          transition={{ duration: 1.5, delay: 0.8 }}
         >
           <Canvas camera={{ position: [0, 0, 8], fov: 50 }}>
             <Suspense fallback={null}>
               <PerspectiveCamera makeDefault position={[0, 0, 8]} />
-              <ambientLight intensity={0.3} />
+              <ambientLight intensity={0.2} />
               <pointLight
                 position={[5, 5, 5]}
-                intensity={1.5}
-                color="#38F9D7"
+                intensity={1.2}
+                color="#FFD580"
               />
               <pointLight
                 position={[-5, -5, 5]}
-                intensity={1}
-                color="#6B7EFF"
+                intensity={0.8}
+                color="#FF5E5B"
               />
               <spotLight
                 position={[0, 10, 10]}
                 angle={0.3}
-                intensity={1.2}
-                color="#38F9D7"
+                intensity={1}
+                color="#FFD580"
                 castShadow
               />
               <FloatingStorefront />
@@ -416,58 +422,58 @@ const CinematicHero = () => {
                 enableZoom={false}
                 enablePan={false}
                 autoRotate
-                autoRotateSpeed={0.3}
+                autoRotateSpeed={0.2}
               />
             </Suspense>
           </Canvas>
 
-          {/* Floating performance metrics */}
+          {/* Performance metrics with cinematic styling */}
           <motion.div
-            className="absolute top-20 -left-6 bg-black/80 backdrop-blur-sm border border-mint/30 rounded-lg px-4 py-3"
+            className="absolute top-24 -left-8 bg-black/90 backdrop-blur-sm border border-gold/30 rounded-xl px-6 py-4"
             animate={{ y: [0, -15, 0] }}
-            transition={{ duration: 4, repeat: Infinity }}
+            transition={{ duration: 5, repeat: Infinity }}
           >
-            <div className="text-mint font-bold text-lg">+89%</div>
-            <div className="text-gray-400 text-xs uppercase tracking-wider">
-              Conversion
+            <div className="text-gold font-bold text-xl">+127%</div>
+            <div className="text-gray-400 text-xs tracking-wider uppercase">
+              Revenue Growth
             </div>
           </motion.div>
 
           <motion.div
-            className="absolute bottom-24 -right-6 bg-black/80 backdrop-blur-sm border border-violet/30 rounded-lg px-4 py-3"
-            animate={{ y: [0, 15, 0] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 2 }}
+            className="absolute bottom-32 -right-8 bg-black/90 backdrop-blur-sm border border-accent/30 rounded-xl px-6 py-4"
+            animate={{ y: [0, 18, 0] }}
+            transition={{ duration: 5, repeat: Infinity, delay: 2.5 }}
           >
-            <div className="text-violet font-bold text-lg">1.2s</div>
-            <div className="text-gray-400 text-xs uppercase tracking-wider">
+            <div className="text-accent font-bold text-xl">0.9s</div>
+            <div className="text-gray-400 text-xs tracking-wider uppercase">
               Load Time
             </div>
           </motion.div>
 
           <motion.div
-            className="absolute top-1/2 -left-8 bg-black/80 backdrop-blur-sm border border-mint/30 rounded-lg px-4 py-3"
-            animate={{ x: [0, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, delay: 1 }}
+            className="absolute top-1/2 -left-12 bg-black/90 backdrop-blur-sm border border-gold/30 rounded-xl px-6 py-4"
+            animate={{ x: [0, -12, 0] }}
+            transition={{ duration: 6, repeat: Infinity, delay: 1 }}
           >
-            <div className="text-mint font-bold text-lg">98%</div>
-            <div className="text-gray-400 text-xs uppercase tracking-wider">
-              Lighthouse
+            <div className="text-gold font-bold text-xl">99</div>
+            <div className="text-gray-400 text-xs tracking-wider uppercase">
+              Lighthouse Score
             </div>
           </motion.div>
         </motion.div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Cinematic scroll indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
-        animate={{ y: [0, 20, 0] }}
-        transition={{ duration: 3, repeat: Infinity }}
+        className="absolute bottom-16 left-1/2 transform -translate-x-1/2"
+        animate={{ y: [0, 25, 0] }}
+        transition={{ duration: 4, repeat: Infinity }}
       >
-        <div className="w-8 h-16 border-2 border-mint/60 rounded-full flex justify-center p-3">
+        <div className="w-8 h-16 border-2 border-gold/50 rounded-full flex justify-center p-3">
           <motion.div
-            className="w-1 h-4 bg-gradient-to-b from-mint to-violet rounded-full"
+            className="w-1 h-6 bg-gradient-to-b from-gold to-accent rounded-full"
             animate={{ y: [0, 20, 0] }}
-            transition={{ duration: 3, repeat: Infinity }}
+            transition={{ duration: 4, repeat: Infinity }}
           />
         </div>
       </motion.div>
