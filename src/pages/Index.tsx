@@ -39,7 +39,7 @@ const Index = () => {
 
       {/* Main application */}
       {isLoaded && (
-        <div className="min-h-screen bg-navy text-white overflow-x-hidden relative">
+        <div className="min-h-screen bg-black text-white overflow-x-hidden relative">
           {/* Full-page ripple effect */}
           <RippleBackground />
 
