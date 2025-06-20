@@ -1,7 +1,7 @@
 import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import { useSpring, animated } from "@react-spring/three";
-import { Text, Box, RoundedBox } from "@react-three/drei";
+import { RoundedBox } from "@react-three/drei";
 import * as THREE from "three";
 
 const ShopifyStorefront = () => {
@@ -45,44 +45,40 @@ const ShopifyStorefront = () => {
       </RoundedBox>
 
       {/* Header bar */}
-      <Box args={[2.4, 0.3, 0.01]} position={[0, 1.4, 0.13]}>
+      <mesh position={[0, 1.4, 0.13]}>
+        <boxGeometry args={[2.4, 0.3, 0.01]} />
         <meshStandardMaterial color="#00FFB2" />
-      </Box>
+      </mesh>
 
       {/* Product cards */}
-      <Box args={[1, 0.8, 0.01]} position={[-0.6, 0.3, 0.13]}>
+      <mesh position={[-0.6, 0.3, 0.13]}>
+        <boxGeometry args={[1, 0.8, 0.01]} />
         <meshStandardMaterial color="#ffffff" opacity={0.9} transparent />
-      </Box>
-      <Box args={[1, 0.8, 0.01]} position={[0.6, 0.3, 0.13]}>
+      </mesh>
+      <mesh position={[0.6, 0.3, 0.13]}>
+        <boxGeometry args={[1, 0.8, 0.01]} />
         <meshStandardMaterial color="#ffffff" opacity={0.9} transparent />
-      </Box>
+      </mesh>
 
       {/* Bottom navigation */}
-      <Box args={[2.4, 0.4, 0.01]} position={[0, -1.4, 0.13]}>
+      <mesh position={[0, -1.4, 0.13]}>
+        <boxGeometry args={[2.4, 0.4, 0.01]} />
         <meshStandardMaterial color="#00FFB2" opacity={0.8} transparent />
-      </Box>
+      </mesh>
 
       {/* Floating elements */}
-      <Box args={[0.2, 0.2, 0.2]} position={[-2, 1, 1]}>
+      <mesh position={[-2, 1, 1]}>
+        <boxGeometry args={[0.2, 0.2, 0.2]} />
         <meshStandardMaterial color="#00FFB2" />
-      </Box>
-      <Box args={[0.15, 0.15, 0.15]} position={[2.2, -0.5, 0.8]}>
+      </mesh>
+      <mesh position={[2.2, -0.5, 0.8]}>
+        <boxGeometry args={[0.15, 0.15, 0.15]} />
         <meshStandardMaterial color="#ffffff" />
-      </Box>
-      <Box args={[0.1, 0.1, 0.1]} position={[-1.8, -1.2, 1.2]}>
+      </mesh>
+      <mesh position={[-1.8, -1.2, 1.2]}>
+        <boxGeometry args={[0.1, 0.1, 0.1]} />
         <meshStandardMaterial color="#00FFB2" />
-      </Box>
-
-      {/* Shopify logo placeholder */}
-      <Text
-        position={[0, 1.4, 0.14]}
-        fontSize={0.15}
-        color="#0A192F"
-        anchorX="center"
-        anchorY="middle"
-      >
-        SHOPIFY
-      </Text>
+      </mesh>
     </animated.group>
   );
 };
