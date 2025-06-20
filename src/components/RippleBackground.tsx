@@ -69,9 +69,14 @@ const RippleBackground = ({ className = "" }: RippleBackgroundProps) => {
           ripple.y,
           ripple.radius,
         );
-        gradient.addColorStop(0, `rgba(0, 255, 178, 0)`);
-        gradient.addColorStop(0.7, `rgba(0, 255, 178, ${ripple.alpha * 0.1})`);
-        gradient.addColorStop(1, `rgba(0, 255, 178, 0)`);
+
+        // Alternate between mint and violet colors
+        const color =
+          ripple.radius % 2 === 0 ? "56, 249, 215" : "107, 126, 255";
+
+        gradient.addColorStop(0, `rgba(${color}, 0)`);
+        gradient.addColorStop(0.7, `rgba(${color}, ${ripple.alpha * 0.15})`);
+        gradient.addColorStop(1, `rgba(${color}, 0)`);
 
         ctx.beginPath();
         ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
@@ -81,8 +86,8 @@ const RippleBackground = ({ className = "" }: RippleBackgroundProps) => {
         // Draw ripple ring
         ctx.beginPath();
         ctx.arc(ripple.x, ripple.y, ripple.radius, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(0, 255, 178, ${ripple.alpha * 0.3})`;
-        ctx.lineWidth = 2;
+        ctx.strokeStyle = `rgba(${color}, ${ripple.alpha * 0.4})`;
+        ctx.lineWidth = 1.5;
         ctx.stroke();
       });
 
