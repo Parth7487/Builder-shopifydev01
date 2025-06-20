@@ -50,7 +50,7 @@ const CinematicNavigation = () => {
       <motion.nav
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           isScrolled
-            ? "bg-navy/95 backdrop-blur-xl border-b border-mint/10 shadow-2xl"
+            ? "bg-black/95 backdrop-blur-xl border-b border-mint/10 shadow-2xl"
             : "bg-transparent"
         }`}
         initial={{ y: -100 }}
@@ -61,7 +61,7 @@ const CinematicNavigation = () => {
           <div className="flex items-center justify-between">
             {/* Logo */}
             <motion.div
-              className="flex items-center space-x-3 cursor-pointer"
+              className="flex items-center space-x-4 cursor-pointer"
               onClick={() => scrollToSection("hero")}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -73,10 +73,10 @@ const CinematicNavigation = () => {
                 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-mint to-mint/80 rounded-xl flex items-center justify-center relative">
-                  <span className="text-navy font-bold text-lg">S</span>
+                <div className="w-12 h-12 bg-gradient-to-br from-mint via-mint/80 to-violet rounded-lg flex items-center justify-center relative">
+                  <span className="text-black font-bold text-xl">S</span>
                   <motion.div
-                    className="absolute inset-0 border-2 border-mint/30 rounded-xl"
+                    className="absolute inset-0 border-2 border-mint/30 rounded-lg"
                     animate={{
                       scale: [1, 1.2, 1],
                       opacity: [1, 0, 1],
@@ -87,15 +87,15 @@ const CinematicNavigation = () => {
               </motion.div>
               <div>
                 <motion.span
-                  className="text-white font-bold text-xl"
+                  className="text-white font-bold text-xl tracking-wider uppercase"
                   animate={
                     isScrolled
                       ? {}
                       : {
                           textShadow: [
-                            "0 0 5px rgba(0,255,178,0.5)",
-                            "0 0 20px rgba(0,255,178,0.8)",
-                            "0 0 5px rgba(0,255,178,0.5)",
+                            "0 0 5px rgba(56,249,215,0.5)",
+                            "0 0 20px rgba(56,249,215,0.8)",
+                            "0 0 5px rgba(56,249,215,0.5)",
                           ],
                         }
                   }
@@ -112,7 +112,7 @@ const CinematicNavigation = () => {
                 <motion.button
                   key={item.id}
                   onClick={() => scrollToSection(item.id)}
-                  className={`relative px-4 py-2 text-white hover:text-mint transition-all duration-300 ${
+                  className={`relative px-6 py-3 text-white hover:text-mint transition-all duration-300 font-medium tracking-wider uppercase text-sm ${
                     activeSection === item.id ? "text-mint" : ""
                   }`}
                   whileHover={{ scale: 1.05 }}
@@ -123,7 +123,7 @@ const CinematicNavigation = () => {
                   {item.label}
                   {activeSection === item.id && (
                     <motion.div
-                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-mint"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-mint to-violet"
                       layoutId="navIndicator"
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: 1 }}
@@ -131,7 +131,7 @@ const CinematicNavigation = () => {
                     />
                   )}
                   <motion.div
-                    className="absolute inset-0 bg-mint/10 rounded-lg"
+                    className="absolute inset-0 bg-gradient-to-r from-mint/5 to-violet/5 rounded-lg"
                     initial={{ scale: 0, opacity: 0 }}
                     whileHover={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 0.2 }}
@@ -152,7 +152,7 @@ const CinematicNavigation = () => {
               >
                 <Button
                   onClick={() => scrollToSection("contact")}
-                  className="bg-mint text-navy hover:bg-mint/90 font-semibold px-6 py-2 rounded-full relative overflow-hidden group"
+                  className="bg-gradient-to-r from-mint to-violet text-black hover:from-mint/90 hover:to-violet/90 font-bold px-8 py-3 rounded-lg relative overflow-hidden group tracking-wider uppercase text-sm"
                 >
                   <span className="relative z-10">Start the Conversation</span>
                   <motion.div
@@ -165,12 +165,12 @@ const CinematicNavigation = () => {
                     className="absolute inset-0"
                     animate={{
                       boxShadow: [
-                        "0 0 20px rgba(0,255,178,0.3)",
-                        "0 0 40px rgba(0,255,178,0.6)",
-                        "0 0 20px rgba(0,255,178,0.3)",
+                        "0 0 20px rgba(56,249,215,0.4)",
+                        "0 0 40px rgba(107,126,255,0.6)",
+                        "0 0 20px rgba(56,249,215,0.4)",
                       ],
                     }}
-                    transition={{ duration: 2, repeat: Infinity }}
+                    transition={{ duration: 3, repeat: Infinity }}
                   />
                 </Button>
               </motion.div>
