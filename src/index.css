@@ -12,32 +12,32 @@
   */
   :root {
     --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
+    --foreground: 0 0% 95%;
 
-    --card: 214 25% 9%;
-    --card-foreground: 0 0% 100%;
+    --card: 240 4% 11%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 214 25% 9%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 240 4% 11%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 162 93% 59%;
+    --primary: 42 100% 75%;
     --primary-foreground: 0 0% 4%;
 
-    --secondary: 214 25% 12%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 240 3% 17%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 214 25% 12%;
-    --muted-foreground: 210 20% 70%;
+    --muted: 240 3% 17%;
+    --muted-foreground: 240 5% 64%;
 
-    --accent: 231 100% 71%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 2 100% 68%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 214 25% 15%;
-    --input: 214 25% 15%;
-    --ring: 162 93% 59%;
+    --border: 240 3% 17%;
+    --input: 240 3% 17%;
+    --ring: 42 100% 75%;
 
     --radius: 0.75rem;
 
@@ -60,40 +60,40 @@
 
   .dark {
     --background: 0 0% 4%;
-    --foreground: 0 0% 100%;
+    --foreground: 0 0% 95%;
 
-    --card: 214 25% 9%;
-    --card-foreground: 0 0% 100%;
+    --card: 240 4% 11%;
+    --card-foreground: 0 0% 95%;
 
-    --popover: 214 25% 9%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 240 4% 11%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 162 93% 59%;
+    --primary: 42 100% 75%;
     --primary-foreground: 0 0% 4%;
 
-    --secondary: 214 25% 12%;
-    --secondary-foreground: 0 0% 100%;
+    --secondary: 240 3% 17%;
+    --secondary-foreground: 0 0% 95%;
 
-    --muted: 214 25% 12%;
-    --muted-foreground: 210 20% 70%;
+    --muted: 240 3% 17%;
+    --muted-foreground: 240 5% 64%;
 
-    --accent: 231 100% 71%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 2 100% 68%;
+    --accent-foreground: 0 0% 95%;
 
     --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive-foreground: 0 0% 95%;
 
-    --border: 214 25% 15%;
-    --input: 214 25% 15%;
-    --ring: 162 93% 59%;
+    --border: 240 3% 17%;
+    --input: 240 3% 17%;
+    --ring: 42 100% 75%;
     --sidebar-background: 0 0% 4%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 162 93% 59%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-primary: 42 100% 75%;
     --sidebar-primary-foreground: 0 0% 4%;
-    --sidebar-accent: 214 25% 12%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 214 25% 15%;
-    --sidebar-ring: 162 93% 59%;
+    --sidebar-accent: 240 3% 17%;
+    --sidebar-accent-foreground: 0 0% 95%;
+    --sidebar-border: 240 3% 17%;
+    --sidebar-ring: 42 100% 75%;
   }
 }
 
@@ -135,27 +135,41 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-white via-mint to-violet bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-gray-100 via-gold to-accent bg-clip-text text-transparent;
   }
 
-  .mint-glow {
-    box-shadow: 0 0 20px rgba(56, 249, 215, 0.4);
+  .gold-glow {
+    box-shadow: 0 0 20px rgba(255, 213, 128, 0.4);
   }
 
-  .mint-glow-strong {
+  .gold-glow-strong {
     box-shadow:
-      0 0 30px rgba(56, 249, 215, 0.6),
-      0 0 60px rgba(56, 249, 215, 0.4);
+      0 0 30px rgba(255, 213, 128, 0.6),
+      0 0 60px rgba(255, 213, 128, 0.4);
   }
 
-  .violet-glow {
-    box-shadow: 0 0 20px rgba(107, 126, 255, 0.4);
+  .accent-glow {
+    box-shadow: 0 0 20px rgba(255, 94, 91, 0.4);
   }
 
-  .violet-glow-strong {
+  .accent-glow-strong {
     box-shadow:
-      0 0 30px rgba(107, 126, 255, 0.6),
-      0 0 60px rgba(107, 126, 255, 0.4);
+      0 0 30px rgba(255, 94, 91, 0.6),
+      0 0 60px rgba(255, 94, 91, 0.4);
+  }
+
+  .cinematic-grain {
+    background-image:
+      radial-gradient(
+        circle at 25% 25%,
+        rgba(255, 213, 128, 0.1) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 75%,
+        rgba(255, 94, 91, 0.1) 0%,
+        transparent 50%
+      );
   }
 
   .perspective-1000 {
