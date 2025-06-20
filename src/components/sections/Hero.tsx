@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import ShopifyStorefront from "../3d/ShopifyStorefront";
 import FloatingShapes from "../3d/FloatingShapes";
+import Loading3D from "../3d/Loading3D";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -26,7 +27,7 @@ const Hero = () => {
       {/* 3D Background */}
       <div className="absolute inset-0 opacity-80">
         <Canvas>
-          <Suspense fallback={null}>
+          <Suspense fallback={<Loading3D />}>
             <PerspectiveCamera makeDefault position={[0, 0, 10]} />
             <ambientLight intensity={0.4} />
             <pointLight
@@ -102,7 +103,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <Canvas>
-            <Suspense fallback={null}>
+            <Suspense fallback={<Loading3D />}>
               <PerspectiveCamera makeDefault position={[0, 0, 8]} />
               <ambientLight intensity={0.6} />
               <pointLight position={[5, 5, 5]} intensity={1} color="#00FFB2" />
