@@ -12,7 +12,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
   useEffect(() => {
     let animationFrame: number;
     const startTime = Date.now();
-    const duration = 3000; // 3 seconds
+    const duration = 3500; // 3.5 seconds for cinematic feel
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
@@ -23,8 +23,8 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
       if (newProgress >= 100) {
         setTimeout(() => {
           setIsComplete(true);
-          setTimeout(onComplete, 1000);
-        }, 500);
+          setTimeout(onComplete, 1200);
+        }, 800);
       } else {
         animationFrame = requestAnimationFrame(updateProgress);
       }
@@ -39,47 +39,87 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
     };
   }, [onComplete]);
 
-  // Shopify Bag SVG Icon
-  const ShopifyBagIcon = () => (
-    <svg
-      width="80"
-      height="80"
-      viewBox="0 0 100 100"
-      className="text-mint"
-      fill="currentColor"
-    >
-      <motion.path
-        d="M25 35 L75 35 L72 80 L28 80 Z"
+  // Cinematic Shopify Bag SVG
+  const CinematicShopifyBag = () => (
+    <div className="relative">
+      <svg
+        width="100"
+        height="100"
+        viewBox="0 0 120 120"
+        className="text-gold drop-shadow-2xl"
         fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+      >
+        {/* Main bag body with gradient effect */}
+        <motion.path
+          d="M30 42 L90 42 L86 95 L34 95 Z"
+          fill="none"
+          stroke="url(#bagGradient)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2, ease: "easeInOut" }}
+        />
+
+        {/* Bag handles */}
+        <motion.path
+          d="M42 42 V30 C42 21 47 18 60 18 C73 18 78 21 78 30 V42"
+          fill="none"
+          stroke="url(#handleGradient)"
+          strokeWidth="3"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
+        />
+
+        {/* Shopify logo mark */}
+        <motion.circle
+          cx="60"
+          cy="65"
+          r="4"
+          fill="url(#centerGradient)"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 1.8, ease: "easeOut" }}
+        />
+
+        {/* Gradient definitions */}
+        <defs>
+          <linearGradient id="bagGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFD580" />
+            <stop offset="100%" stopColor="#FF5E5B" />
+          </linearGradient>
+          <linearGradient id="handleGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#FF5E5B" />
+            <stop offset="100%" stopColor="#FFD580" />
+          </linearGradient>
+          <radialGradient id="centerGradient">
+            <stop offset="0%" stopColor="#FFD580" />
+            <stop offset="100%" stopColor="#FF5E5B" />
+          </radialGradient>
+        </defs>
+      </svg>
+
+      {/* Ambient glow effect */}
+      <motion.div
+        className="absolute inset-0 bg-gradient-to-br from-gold/20 to-accent/20 rounded-full blur-3xl"
+        style={{
+          width: "200px",
+          height: "200px",
+          left: "50%",
+          top: "50%",
+          transform: "translate(-50%, -50%)",
+        }}
+        animate={{
+          scale: [1, 1.3, 1],
+          opacity: [0.3, 0.7, 0.3],
+        }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
       />
-      <motion.path
-        d="M35 35 V25 C35 18 40 15 50 15 C60 15 65 18 65 25 V35"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        initial={{ pathLength: 0, opacity: 0 }}
-        animate={{ pathLength: 1, opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.3, ease: "easeInOut" }}
-      />
-      <motion.circle
-        cx="50"
-        cy="55"
-        r="3"
-        fill="currentColor"
-        initial={{ scale: 0, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.5, delay: 1.2, ease: "easeOut" }}
-      />
-    </svg>
+    </div>
   );
 
   return (
@@ -87,52 +127,55 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
       {!isComplete && (
         <motion.div
           className="fixed inset-0 z-[100] bg-black flex items-center justify-center"
-          exit={{ opacity: 0, scale: 1.1 }}
-          transition={{ duration: 1, ease: "easeInOut" }}
+          exit={{
+            scale: 1.1,
+            opacity: 0,
+          }}
+          transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
         >
-          {/* Gradient background overlay */}
+          {/* Cinematic background with subtle gradients */}
           <motion.div
-            className="absolute inset-0 bg-gradient-to-br from-black via-navy to-black"
+            className="absolute inset-0 bg-gradient-to-br from-black via-charcoal to-black cinematic-grain"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 2 }}
           />
 
-          {/* Animated grid background */}
+          {/* Subtle grid pattern */}
           <motion.div
-            className="absolute inset-0 opacity-5"
+            className="absolute inset-0 opacity-[0.02]"
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.05 }}
-            transition={{ duration: 1.5 }}
+            animate={{ opacity: 0.02 }}
+            transition={{ duration: 2, delay: 0.5 }}
           >
             <div
               className="w-full h-full"
               style={{
-                backgroundImage: `linear-gradient(rgba(56,249,215,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(56,249,215,0.1) 1px, transparent 1px)`,
-                backgroundSize: "50px 50px",
+                backgroundImage: `linear-gradient(rgba(255,213,128,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,213,128,0.1) 1px, transparent 1px)`,
+                backgroundSize: "60px 60px",
               }}
             />
           </motion.div>
 
           {/* Floating particles */}
           <div className="absolute inset-0 overflow-hidden">
-            {[...Array(20)].map((_, i) => (
+            {[...Array(15)].map((_, i) => (
               <motion.div
                 key={i}
-                className="absolute w-1 h-1 bg-mint/30 rounded-full"
+                className="absolute w-1 h-1 bg-gold/20 rounded-full"
                 style={{
                   left: `${Math.random() * 100}%`,
                   top: `${Math.random() * 100}%`,
                 }}
                 animate={{
-                  y: [0, -100, 0],
-                  opacity: [0, 1, 0],
-                  scale: [0, 1, 0],
+                  y: [0, -120, 0],
+                  opacity: [0, 0.6, 0],
+                  scale: [0, 1.2, 0],
                 }}
                 transition={{
-                  duration: 4 + Math.random() * 2,
+                  duration: 6 + Math.random() * 3,
                   repeat: Infinity,
-                  delay: Math.random() * 3,
+                  delay: Math.random() * 4,
                   ease: "easeInOut",
                 }}
               />
@@ -140,166 +183,119 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
           </div>
 
           <div className="text-center relative z-10">
-            {/* Shopify Bag Icon */}
+            {/* Main logo with cinematic reveal */}
             <motion.div
-              className="mb-12"
-              initial={{ scale: 0, rotate: -180 }}
-              animate={{ scale: 1, rotate: 0 }}
-              transition={{ duration: 1.2, ease: "easeOut" }}
+              className="mb-16"
+              initial={{ scale: 0.5, opacity: 0, rotateY: -90 }}
+              animate={{ scale: 1, opacity: 1, rotateY: 0 }}
+              transition={{
+                duration: 1.5,
+                ease: [0.76, 0, 0.24, 1],
+                delay: 0.3,
+              }}
             >
-              <div className="relative">
-                <motion.div
-                  className="flex items-center justify-center"
-                  animate={{
-                    y: [0, -10, 0],
-                  }}
-                  transition={{
-                    duration: 3,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <ShopifyBagIcon />
-                </motion.div>
-
-                {/* Orbital rings */}
-                <motion.div
-                  className="absolute inset-0 border border-mint/20 rounded-full"
-                  style={{
-                    width: "120px",
-                    height: "120px",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                />
-                <motion.div
-                  className="absolute inset-0 border border-violet/10 rounded-full"
-                  style={{
-                    width: "160px",
-                    height: "160px",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  animate={{ rotate: -360 }}
-                  transition={{
-                    duration: 12,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-
-                {/* Pulsing glow */}
-                <motion.div
-                  className="absolute inset-0 bg-mint/10 rounded-full blur-xl"
-                  style={{
-                    width: "200px",
-                    height: "200px",
-                    left: "50%",
-                    top: "50%",
-                    transform: "translate(-50%, -50%)",
-                  }}
-                  animate={{
-                    scale: [1, 1.2, 1],
-                    opacity: [0.3, 0.6, 0.3],
-                  }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-              </div>
+              <CinematicShopifyBag />
             </motion.div>
 
-            {/* Brand name */}
+            {/* Studio branding */}
             <motion.div
-              className="mb-12"
-              initial={{ opacity: 0, y: 30 }}
+              className="mb-16"
+              initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 1, delay: 1.2 }}
             >
-              <h1 className="text-3xl font-bold text-white mb-2 tracking-wider uppercase">
+              <motion.h1
+                className="text-4xl font-bold text-gray-100 mb-3 tracking-tight"
+                animate={{
+                  textShadow: [
+                    "0 0 20px rgba(255,213,128,0.3)",
+                    "0 0 40px rgba(255,213,128,0.6)",
+                    "0 0 20px rgba(255,213,128,0.3)",
+                  ],
+                }}
+                transition={{ duration: 4, repeat: Infinity }}
+              >
                 SHOPIFY DEV STUDIO
-              </h1>
-              <p className="text-gray-400 text-sm font-light tracking-widest uppercase">
+              </motion.h1>
+              <p className="text-gray-400 text-sm font-light tracking-[0.2em] uppercase">
                 Premium Theme Development
               </p>
             </motion.div>
 
-            {/* Progress counter */}
+            {/* Progress display */}
             <motion.div
-              className="mb-8"
+              className="mb-12"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 1 }}
+              transition={{ duration: 0.8, delay: 1.8 }}
             >
               <motion.div
-                className="text-7xl font-bold text-gradient font-mono leading-none"
+                className="text-8xl font-bold text-gradient font-mono leading-none mb-2"
                 key={Math.floor(progress)}
-                initial={{ scale: 0.8 }}
+                initial={{ scale: 0.9 }}
                 animate={{ scale: 1 }}
-                transition={{ duration: 0.2 }}
+                transition={{ duration: 0.3 }}
               >
-                {Math.floor(progress).toString().padStart(3, "0")}
+                {Math.floor(progress).toString().padStart(2, "0")}
               </motion.div>
-              <div className="text-mint/60 text-sm font-light tracking-widest uppercase mt-2">
-                PERCENT
+              <div className="text-gold/60 text-xs font-light tracking-[0.3em] uppercase">
+                PERCENT COMPLETE
               </div>
             </motion.div>
 
-            {/* Progress bar */}
-            <div className="w-80 h-1 bg-navy/50 rounded-full mx-auto mb-8 overflow-hidden">
+            {/* Cinematic progress bar */}
+            <div className="w-96 h-[2px] bg-graphite/50 rounded-full mx-auto mb-12 overflow-hidden">
               <motion.div
-                className="h-full bg-gradient-to-r from-mint via-violet to-mint rounded-full"
+                className="h-full bg-gradient-to-r from-gold via-accent to-gold rounded-full relative"
                 initial={{ width: "0%" }}
                 animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.1 }}
-              />
+                transition={{ duration: 0.2 }}
+              >
+                {/* Shimmer effect */}
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                  animate={{ x: ["-100%", "200%"] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                />
+              </motion.div>
             </div>
 
-            {/* Loading text */}
+            {/* Loading status */}
             <motion.p
-              className="text-gray-500 text-xs font-light tracking-wider uppercase"
-              animate={{ opacity: [0.5, 1, 0.5] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              className="text-gray-500 text-xs font-light tracking-widest uppercase"
+              animate={{ opacity: [0.4, 0.8, 0.4] }}
+              transition={{ duration: 2.5, repeat: Infinity }}
             >
-              Loading Experience...
+              Crafting Experience...
             </motion.p>
           </div>
 
-          {/* Corner frame decorations */}
+          {/* Corner frame elements */}
+          {[
+            { position: "top-8 left-8", rotation: 0 },
+            { position: "top-8 right-8", rotation: 90 },
+            { position: "bottom-8 left-8", rotation: 270 },
+            { position: "bottom-8 right-8", rotation: 180 },
+          ].map((corner, index) => (
+            <motion.div
+              key={index}
+              className={`absolute ${corner.position} w-24 h-24`}
+              style={{ rotate: corner.rotation }}
+              initial={{ scale: 0, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 1, delay: 0.5 + index * 0.1 }}
+            >
+              <div className="w-full h-full border-l-[1px] border-t-[1px] border-gold/30" />
+            </motion.div>
+          ))}
+
+          {/* Subtle spotlight effect */}
           <motion.div
-            className="absolute top-8 left-8 w-20 h-20"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.3 }}
-          >
-            <div className="w-full h-full border-l-2 border-t-2 border-mint/30" />
-          </motion.div>
-          <motion.div
-            className="absolute top-8 right-8 w-20 h-20"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.4 }}
-          >
-            <div className="w-full h-full border-r-2 border-t-2 border-violet/30" />
-          </motion.div>
-          <motion.div
-            className="absolute bottom-8 left-8 w-20 h-20"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <div className="w-full h-full border-l-2 border-b-2 border-violet/30" />
-          </motion.div>
-          <motion.div
-            className="absolute bottom-8 right-8 w-20 h-20"
-            initial={{ scale: 0, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 1, delay: 0.6 }}
-          >
-            <div className="w-full h-full border-r-2 border-b-2 border-mint/30" />
-          </motion.div>
+            className="absolute inset-0 bg-gradient-radial from-transparent via-transparent to-black/40"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 3 }}
+          />
         </motion.div>
       )}
     </AnimatePresence>
