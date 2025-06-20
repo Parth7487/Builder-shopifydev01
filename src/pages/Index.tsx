@@ -1,37 +1,77 @@
-import { useEffect } from "react";
-import Navigation from "../components/sections/Navigation";
-import Hero from "../components/sections/Hero";
-import Services from "../components/sections/Services";
-import CaseStudies from "../components/sections/CaseStudies";
+import { useState, useEffect } from "react";
+import Preloader from "../components/Preloader";
+import RippleBackground from "../components/RippleBackground";
+import CinematicNavigation from "../components/sections/CinematicNavigation";
+import CinematicHero from "../components/sections/CinematicHero";
+import EnhancedServices from "../components/sections/EnhancedServices";
+import InteractiveCaseStudies from "../components/sections/InteractiveCaseStudies";
 import About from "../components/sections/About";
-import Testimonials from "../components/sections/Testimonials";
-import Contact from "../components/sections/Contact";
-import FinalCTA from "../components/sections/FinalCTA";
+import AnimatedTestimonials from "../components/sections/AnimatedTestimonials";
+import EnhancedContact from "../components/sections/EnhancedContact";
+import CinematicFinalCTA from "../components/sections/CinematicFinalCTA";
 import Footer from "../components/sections/Footer";
 
 const Index = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     // Set dark mode by default for the landing page
     document.documentElement.classList.add("dark");
 
-    // Cleanup function to maintain proper state
+    // Prevent scrolling during preloader
+    document.body.style.overflow = "hidden";
+
     return () => {
-      // Optional: remove dark class if needed when component unmounts
+      // Cleanup function to maintain proper state
+      document.body.style.overflow = "unset";
     };
   }, []);
 
+  const handlePreloaderComplete = () => {
+    setIsLoaded(true);
+    document.body.style.overflow = "unset";
+  };
+
   return (
-    <div className="min-h-screen bg-navy text-white overflow-x-hidden">
-      <Navigation />
-      <Hero />
-      <Services />
-      <CaseStudies />
-      <About />
-      <Testimonials />
-      <Contact />
-      <FinalCTA />
-      <Footer />
-    </div>
+    <>
+      {/* Preloader */}
+      {!isLoaded && <Preloader onComplete={handlePreloaderComplete} />}
+
+      {/* Main application */}
+      {isLoaded && (
+        <div className="min-h-screen bg-navy text-white overflow-x-hidden relative">
+          {/* Full-page ripple effect */}
+          <RippleBackground />
+
+          {/* Navigation */}
+          <CinematicNavigation />
+
+          {/* Main content */}
+          <main>
+            <div id="hero">
+              <CinematicHero />
+            </div>
+            <div id="services">
+              <EnhancedServices />
+            </div>
+            <div id="work">
+              <InteractiveCaseStudies />
+            </div>
+            <div id="about">
+              <About />
+            </div>
+            <AnimatedTestimonials />
+            <div id="contact">
+              <EnhancedContact />
+            </div>
+            <CinematicFinalCTA />
+          </main>
+
+          {/* Footer */}
+          <Footer />
+        </div>
+      )}
+    </>
   );
 };
 
