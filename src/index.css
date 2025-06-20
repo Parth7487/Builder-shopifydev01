@@ -20,7 +20,7 @@
     --popover: 240 4% 11%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 42 100% 75%;
+    --primary: 30 44% 70%;
     --primary-foreground: 0 0% 4%;
 
     --secondary: 240 3% 17%;
@@ -29,17 +29,17 @@
     --muted: 240 3% 17%;
     --muted-foreground: 240 5% 64%;
 
-    --accent: 2 100% 68%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 30 44% 70%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 95%;
 
     --border: 240 3% 17%;
     --input: 240 3% 17%;
-    --ring: 42 100% 75%;
+    --ring: 30 44% 70%;
 
-    --radius: 0.75rem;
+    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
 
@@ -134,40 +134,36 @@
 }
 
 @layer utilities {
-  .text-gradient {
-    @apply bg-gradient-to-r from-gray-100 via-gold to-accent bg-clip-text text-transparent;
+  .text-elegant {
+    @apply text-gray-100;
   }
 
-  .gold-glow {
-    box-shadow: 0 0 20px rgba(255, 213, 128, 0.4);
+  .text-accent {
+    @apply text-beige;
   }
 
-  .gold-glow-strong {
-    box-shadow:
-      0 0 30px rgba(255, 213, 128, 0.6),
-      0 0 60px rgba(255, 213, 128, 0.4);
+  .elegant-card {
+    @apply bg-charcoal/80 backdrop-blur-sm border border-gray-600/20;
   }
 
-  .accent-glow {
-    box-shadow: 0 0 20px rgba(255, 94, 91, 0.4);
+  .elegant-button {
+    @apply bg-beige text-black hover:bg-beige/90 font-medium;
   }
 
-  .accent-glow-strong {
-    box-shadow:
-      0 0 30px rgba(255, 94, 91, 0.6),
-      0 0 60px rgba(255, 94, 91, 0.4);
+  .elegant-button-outline {
+    @apply border border-beige/60 text-beige hover:bg-beige/10;
   }
 
-  .cinematic-grain {
+  .subtle-grain {
     background-image:
       radial-gradient(
-        circle at 25% 25%,
-        rgba(255, 213, 128, 0.1) 0%,
+        circle at 30% 20%,
+        rgba(230, 177, 126, 0.03) 0%,
         transparent 50%
       ),
       radial-gradient(
-        circle at 75% 75%,
-        rgba(255, 94, 91, 0.1) 0%,
+        circle at 70% 80%,
+        rgba(209, 169, 122, 0.02) 0%,
         transparent 50%
       );
   }
