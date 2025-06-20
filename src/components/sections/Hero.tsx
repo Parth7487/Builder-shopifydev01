@@ -27,7 +27,7 @@ const Hero = () => {
       {/* 3D Background */}
       <div className="absolute inset-0 opacity-80">
         <Canvas>
-          <Suspense fallback={<Loading3DCanvas />}>
+          <Suspense fallback={null}>
             <PerspectiveCamera makeDefault position={[0, 0, 10]} />
             <ambientLight intensity={0.4} />
             <pointLight
@@ -103,7 +103,7 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.3 }}
         >
           <Canvas>
-            <Suspense fallback={<Loading3DCanvas />}>
+            <Suspense fallback={null}>
               <PerspectiveCamera makeDefault position={[0, 0, 8]} />
               <ambientLight intensity={0.6} />
               <pointLight position={[5, 5, 5]} intensity={1} color="#00FFB2" />
