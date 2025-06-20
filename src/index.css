@@ -9,33 +9,33 @@
    * A different format will require also updating the theme in tailwind.config.ts.
   */
   :root {
-    --background: 210 50% 8%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 100%;
 
-    --card: 210 50% 10%;
+    --card: 214 25% 9%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 210 50% 10%;
+    --popover: 214 25% 9%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 162 100% 50%;
-    --primary-foreground: 210 50% 8%;
+    --primary: 162 93% 59%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 210 50% 12%;
+    --secondary: 214 25% 12%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 50% 12%;
+    --muted: 214 25% 12%;
     --muted-foreground: 210 20% 70%;
 
-    --accent: 162 100% 50%;
-    --accent-foreground: 210 50% 8%;
+    --accent: 231 100% 71%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 50% 15%;
-    --input: 210 50% 15%;
-    --ring: 162 100% 50%;
+    --border: 214 25% 15%;
+    --input: 214 25% 15%;
+    --ring: 162 93% 59%;
 
     --radius: 0.75rem;
 
@@ -57,41 +57,41 @@
   }
 
   .dark {
-    --background: 210 50% 8%;
+    --background: 0 0% 4%;
     --foreground: 0 0% 100%;
 
-    --card: 210 50% 10%;
+    --card: 214 25% 9%;
     --card-foreground: 0 0% 100%;
 
-    --popover: 210 50% 10%;
+    --popover: 214 25% 9%;
     --popover-foreground: 0 0% 100%;
 
-    --primary: 162 100% 50%;
-    --primary-foreground: 210 50% 8%;
+    --primary: 162 93% 59%;
+    --primary-foreground: 0 0% 4%;
 
-    --secondary: 210 50% 12%;
+    --secondary: 214 25% 12%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 50% 12%;
+    --muted: 214 25% 12%;
     --muted-foreground: 210 20% 70%;
 
-    --accent: 162 100% 50%;
-    --accent-foreground: 210 50% 8%;
+    --accent: 231 100% 71%;
+    --accent-foreground: 0 0% 4%;
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 210 50% 15%;
-    --input: 210 50% 15%;
-    --ring: 162 100% 50%;
-    --sidebar-background: 210 50% 8%;
+    --border: 214 25% 15%;
+    --input: 214 25% 15%;
+    --ring: 162 93% 59%;
+    --sidebar-background: 0 0% 4%;
     --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 162 100% 50%;
-    --sidebar-primary-foreground: 210 50% 8%;
-    --sidebar-accent: 210 50% 12%;
+    --sidebar-primary: 162 93% 59%;
+    --sidebar-primary-foreground: 0 0% 4%;
+    --sidebar-accent: 214 25% 12%;
     --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 210 50% 15%;
-    --sidebar-ring: 162 100% 50%;
+    --sidebar-border: 214 25% 15%;
+    --sidebar-ring: 162 93% 59%;
   }
 }
 
@@ -101,12 +101,14 @@
   }
 
   body {
-    @apply bg-navy text-white;
+    @apply bg-black text-white;
     font-family:
+      "Satoshi",
       "Inter",
       system-ui,
       -apple-system,
       sans-serif;
+    font-weight: 400;
   }
 
   html {
@@ -116,17 +118,27 @@
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-white to-mint bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white via-mint to-violet bg-clip-text text-transparent;
   }
 
   .mint-glow {
-    box-shadow: 0 0 20px rgba(0, 255, 178, 0.3);
+    box-shadow: 0 0 20px rgba(56, 249, 215, 0.4);
   }
 
   .mint-glow-strong {
     box-shadow:
-      0 0 30px rgba(0, 255, 178, 0.5),
-      0 0 60px rgba(0, 255, 178, 0.3);
+      0 0 30px rgba(56, 249, 215, 0.6),
+      0 0 60px rgba(56, 249, 215, 0.4);
+  }
+
+  .violet-glow {
+    box-shadow: 0 0 20px rgba(107, 126, 255, 0.4);
+  }
+
+  .violet-glow-strong {
+    box-shadow:
+      0 0 30px rgba(107, 126, 255, 0.6),
+      0 0 60px rgba(107, 126, 255, 0.4);
   }
 
   .perspective-1000 {
