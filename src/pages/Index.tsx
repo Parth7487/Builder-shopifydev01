@@ -1,41 +1,34 @@
+import { useEffect } from "react";
+import Navigation from "../components/sections/Navigation";
+import Hero from "../components/sections/Hero";
+import Services from "../components/sections/Services";
+import CaseStudies from "../components/sections/CaseStudies";
+import Testimonials from "../components/sections/Testimonials";
+import Contact from "../components/sections/Contact";
+import FinalCTA from "../components/sections/FinalCTA";
+import Footer from "../components/sections/Footer";
+
 const Index = () => {
+  useEffect(() => {
+    // Set dark mode by default for the landing page
+    document.documentElement.classList.add("dark");
+
+    // Cleanup function to maintain proper state
+    return () => {
+      // Optional: remove dark class if needed when component unmounts
+    };
+  }, []);
+
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200">
-      <div className="text-center">
-        {/* TODO: replace everything here with the actual app! */}
-        <h1 className="text-2xl font-semibold text-slate-800 flex items-center justify-center gap-3">
-          <svg
-            className="animate-spin h-8 w-8 text-slate-400"
-            viewBox="0 0 50 50"
-          >
-            <circle
-              className="opacity-30"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-            />
-            <circle
-              className="text-slate-600"
-              cx="25"
-              cy="25"
-              r="20"
-              stroke="currentColor"
-              strokeWidth="5"
-              fill="none"
-              strokeDasharray="100"
-              strokeDashoffset="75"
-            />
-          </svg>
-          Generating your app...
-        </h1>
-        <p className="mt-4 text-slate-600 max-w-md">
-          Watch the chat on the left for updates that might need your attention
-          to finish generating
-        </p>
-      </div>
+    <div className="min-h-screen bg-navy text-white overflow-x-hidden">
+      <Navigation />
+      <Hero />
+      <Services />
+      <CaseStudies />
+      <Testimonials />
+      <Contact />
+      <FinalCTA />
+      <Footer />
     </div>
   );
 };
