@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 import Preloader from "../components/Preloader";
 import ScrollProgress from "../components/ScrollProgress";
-import CinematicNavigation from "../components/sections/CinematicNavigation";
-import CinematicHero from "../components/sections/CinematicHero";
-import EnhancedServices from "../components/sections/EnhancedServices";
-import InteractiveCaseStudies from "../components/sections/InteractiveCaseStudies";
+import ElegantNavigation from "../components/sections/ElegantNavigation";
+import ElegantHero from "../components/sections/ElegantHero";
+import ScrollStoryPanel from "../components/sections/ScrollStoryPanel";
+import ElegantServices from "../components/sections/ElegantServices";
+import ElegantCaseStudies from "../components/sections/ElegantCaseStudies";
 import About from "../components/sections/About";
 import AnimatedTestimonials from "../components/sections/AnimatedTestimonials";
 import EnhancedContact from "../components/sections/EnhancedContact";
@@ -44,18 +45,19 @@ const Index = () => {
           <ScrollProgress />
 
           {/* Navigation */}
-          <CinematicNavigation />
+          <ElegantNavigation />
 
           {/* Main content */}
           <main>
             <div id="hero">
-              <CinematicHero />
+              <ElegantHero />
             </div>
+            <ScrollStoryPanel />
             <div id="services">
-              <EnhancedServices />
+              <ElegantServices />
             </div>
             <div id="work">
-              <InteractiveCaseStudies />
+              <ElegantCaseStudies />
             </div>
             <div id="about">
               <About />
