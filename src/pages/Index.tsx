@@ -3,6 +3,7 @@ import Navigation from "../components/sections/Navigation";
 import Hero from "../components/sections/Hero";
 import Services from "../components/sections/Services";
 import CaseStudies from "../components/sections/CaseStudies";
+import About from "../components/sections/About";
 import Testimonials from "../components/sections/Testimonials";
 import Contact from "../components/sections/Contact";
 import FinalCTA from "../components/sections/FinalCTA";
@@ -25,6 +26,7 @@ const Index = () => {
       <Hero />
       <Services />
       <CaseStudies />
+      <About />
       <Testimonials />
       <Contact />
       <FinalCTA />
