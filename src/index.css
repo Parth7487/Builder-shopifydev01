@@ -101,6 +101,31 @@
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-navy text-white;
+    font-family:
+      "Inter",
+      system-ui,
+      -apple-system,
+      sans-serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-white to-mint bg-clip-text text-transparent;
+  }
+
+  .mint-glow {
+    box-shadow: 0 0 20px rgba(0, 255, 178, 0.3);
+  }
+
+  .mint-glow-strong {
+    box-shadow:
+      0 0 30px rgba(0, 255, 178, 0.5),
+      0 0 60px rgba(0, 255, 178, 0.3);
   }
 }
