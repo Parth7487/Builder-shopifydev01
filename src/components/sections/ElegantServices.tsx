@@ -35,9 +35,8 @@ const ElegantServices = () => {
 
   return (
     <section
-      id="services"
       ref={containerRef}
-      className="py-32 bg-gradient-to-b from-black to-charcoal/50 relative"
+      className="py-32 bg-gradient-to-b from-black via-charcoal/30 to-black relative min-h-screen flex items-center"
     >
       <div className="max-w-7xl mx-auto px-8">
         {/* Section header */}
