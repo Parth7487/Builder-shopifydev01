@@ -12,6 +12,22 @@
 /* Smooth scrolling for better UX */
 html {
   scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+/* Scroll performance optimizations */
+body {
+  overflow-x: hidden;
+}
+
+/* Improve scroll performance for sections with animations */
+section {
+  will-change: auto;
+}
+
+/* Optimize transforms for smooth animations */
+.motion-safe {
+  will-change: transform, opacity;
 }
 
 /* Custom scrollbar */
