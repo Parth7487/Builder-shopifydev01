@@ -30,7 +30,7 @@ const Footer = () => {
                 Shopify Dev Studio
               </span>
             </div>
-            <p className="text-gray-400 max-w-md leading-relaxed">
+            <p className="text-gray-400 font-light max-w-md leading-relaxed">
               Premium Shopify theme development agency creating exceptional
               e-commerce experiences that drive results and exceed expectations.
             </p>
