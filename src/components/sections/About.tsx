@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const About = () => {
   return (
-    <section id="about" className="py-20 bg-navy relative overflow-hidden">
+    <section className="py-32 bg-gradient-to-b from-charcoal/50 via-black to-charcoal/30 relative overflow-hidden min-h-screen flex items-center">
       {/* Background pattern */}
       <div className="absolute inset-0 opacity-5">
         <div
