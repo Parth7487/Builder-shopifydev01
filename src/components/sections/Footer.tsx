@@ -23,10 +23,10 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-mint rounded-lg flex items-center justify-center">
-                <span className="text-navy font-bold text-sm">S</span>
+              <div className="w-8 h-8 bg-beige rounded-lg flex items-center justify-center">
+                <span className="text-black font-bold text-sm">S</span>
               </div>
-              <span className="text-white font-bold text-xl">
+              <span className="text-gray-100 font-medium text-xl">
                 Shopify Dev Studio
               </span>
             </div>
