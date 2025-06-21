@@ -41,8 +41,13 @@ const ElegantHero = () => {
   return (
     <motion.section
       ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ y, opacity, scale }}
+      className="relative min-h-screen flex items-center justify-center overflow-hidden gpu-accelerated"
+      style={{
+        y,
+        opacity,
+        scale,
+        willChange: "transform, opacity",
+      }}
     >
       {/* Elegant background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-charcoal/40 to-black subtle-grain" />
