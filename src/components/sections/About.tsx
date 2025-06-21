@@ -83,12 +83,12 @@ const About = () => {
               </CardContent>
             </Card>
 
-            <Card className="bg-navy-700/50 border-mint/20 backdrop-blur-sm">
+            <Card className="elegant-card">
               <CardContent className="p-6">
-                <h4 className="text-xl font-semibold text-white mb-3">
+                <h4 className="text-xl font-medium text-gray-100 mb-3">
                   Our Approach
                 </h4>
-                <p className="text-gray-300">
+                <p className="text-gray-400 font-light">
                   We believe in collaboration, attention to detail, and
                   delivering solutions that are not just functional but truly
                   exceptional.
