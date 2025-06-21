@@ -97,7 +97,7 @@ const AnimatedTestimonials = () => {
   return (
     <section
       ref={containerRef}
-      className="py-32 bg-navy-50 relative overflow-hidden"
+      className="py-32 bg-gradient-to-b from-black via-charcoal/20 to-black relative overflow-hidden min-h-screen flex items-center"
     >
       {/* Background elements */}
       <div className="absolute inset-0 opacity-20">
