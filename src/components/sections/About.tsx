@@ -70,12 +70,12 @@ const About = () => {
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <Card className="bg-navy-700/50 border-mint/20 backdrop-blur-sm">
+            <Card className="elegant-card">
               <CardContent className="p-6">
-                <h4 className="text-xl font-semibold text-white mb-3">
+                <h4 className="text-xl font-medium text-gray-100 mb-3">
                   Our Mission
                 </h4>
-                <p className="text-gray-300">
+                <p className="text-gray-400 font-light">
                   To empower brands with exceptional Shopify solutions that
                   drive growth, enhance user experience, and exceed
                   expectations.
