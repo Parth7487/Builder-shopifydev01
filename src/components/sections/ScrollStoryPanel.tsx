@@ -77,7 +77,10 @@ const ScrollStoryPanel = () => {
           {/* Phase 2: Process */}
           <motion.div
             className="absolute inset-0 flex flex-col justify-center"
-            style={{ opacity: phase2Opacity }}
+            style={{
+              opacity: isInView ? phase2Opacity : 0,
+              willChange: "opacity",
+            }}
           >
             <motion.h2 className="text-5xl md:text-7xl font-light text-gray-100 mb-8 leading-tight">
               From Vision
