@@ -48,25 +48,46 @@ const Index = () => {
           <ElegantNavigation />
 
           {/* Main content */}
-          <main>
-            <div id="hero">
+          <main className="relative">
+            {/* Hero Section */}
+            <div id="hero" className="relative z-20">
               <ElegantHero />
             </div>
-            <ScrollStoryPanel />
-            <div id="services">
+
+            {/* Story Panel Section */}
+            <div className="relative z-10">
+              <ScrollStoryPanel />
+            </div>
+
+            {/* Services Section */}
+            <div id="services" className="relative z-20">
               <ElegantServices />
             </div>
-            <div id="work">
+
+            {/* Work Section */}
+            <div id="work" className="relative z-20">
               <ElegantCaseStudies />
             </div>
-            <div id="about">
+
+            {/* About Section */}
+            <div id="about" className="relative z-20">
               <About />
             </div>
-            <AnimatedTestimonials />
-            <div id="contact">
+
+            {/* Testimonials Section */}
+            <div className="relative z-20">
+              <AnimatedTestimonials />
+            </div>
+
+            {/* Contact Section */}
+            <div id="contact" className="relative z-20">
               <EnhancedContact />
             </div>
-            <CinematicFinalCTA />
+
+            {/* Final CTA Section */}
+            <div className="relative z-20">
+              <CinematicFinalCTA />
+            </div>
           </main>
 
           {/* Footer */}
