@@ -23,10 +23,10 @@ const About = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-6xl font-bold text-white mb-6">
-            About <span className="text-gradient">Us</span>
+          <h2 className="text-4xl md:text-6xl font-light text-gray-100 mb-6 leading-tight">
+            About <span className="text-beige">Us</span>
           </h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-400 font-light max-w-3xl mx-auto leading-relaxed">
             We're a team of passionate developers and designers who specialize
             in creating extraordinary Shopify experiences.
           </p>
