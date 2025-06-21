@@ -51,12 +51,14 @@ const About = () => {
             </p>
             <div className="grid grid-cols-2 gap-6">
               <div>
-                <div className="text-3xl font-bold text-mint mb-2">5+</div>
-                <div className="text-gray-400">Years Experience</div>
+                <div className="text-3xl font-light text-beige mb-2">5+</div>
+                <div className="text-gray-500 font-light">Years Experience</div>
               </div>
               <div>
-                <div className="text-3xl font-bold text-mint mb-2">50+</div>
-                <div className="text-gray-400">Projects Completed</div>
+                <div className="text-3xl font-light text-beige mb-2">50+</div>
+                <div className="text-gray-500 font-light">
+                  Projects Completed
+                </div>
               </div>
             </div>
           </motion.div>
