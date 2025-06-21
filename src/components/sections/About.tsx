@@ -39,10 +39,10 @@ const About = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <h3 className="text-3xl font-bold text-white mb-6">
+            <h3 className="text-3xl font-medium text-gray-100 mb-6">
               Crafting Digital Excellence
             </h3>
-            <p className="text-gray-300 text-lg leading-relaxed mb-8">
+            <p className="text-gray-400 text-lg font-light leading-relaxed mb-8">
               With years of experience in Shopify development, we've helped
               brands across the globe transform their e-commerce presence. Our
               team combines technical expertise with creative vision to deliver
