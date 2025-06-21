@@ -42,21 +42,26 @@ const ScrollStoryPanel = () => {
         />
 
         {/* Subtle ambient elements */}
-        <motion.div
-          className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(230,177,126,0.1) 0%, transparent 70%)",
-            opacity: phase2Opacity,
-          }}
-        />
+        {isInView && (
+          <motion.div
+            className="absolute top-1/4 right-1/4 w-80 h-80 rounded-full"
+            style={{
+              background:
+                "radial-gradient(circle, rgba(230,177,126,0.1) 0%, transparent 70%)",
+              opacity: phase2Opacity,
+            }}
+          />
+        )}
 
         {/* Content container */}
-        <div className="relative z-10 max-w-5xl mx-auto px-8 text-center">
+        <div className="relative z-20 max-w-5xl mx-auto px-8 text-center">
           {/* Phase 1: Introduction */}
           <motion.div
             className="absolute inset-0 flex flex-col justify-center"
-            style={{ opacity: phase1Opacity }}
+            style={{
+              opacity: isInView ? phase1Opacity : 0,
+              willChange: "opacity",
+            }}
           >
             <motion.h2 className="text-5xl md:text-7xl font-light text-gray-100 mb-8 leading-tight">
               Crafting Digital
