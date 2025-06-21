@@ -28,7 +28,7 @@ const ScrollStoryPanel = () => {
   return (
     <div
       ref={containerRef}
-      className="relative"
+      className="relative z-10"
       style={{ height: "300vh" }} // 3x viewport height for scroll distance
     >
       {/* Sticky container */}
@@ -36,7 +36,9 @@ const ScrollStoryPanel = () => {
         {/* Dynamic background */}
         <motion.div
           className="absolute inset-0 bg-gradient-to-br from-charcoal via-black to-charcoal"
-          style={{ opacity: backgroundOpacity }}
+          style={{
+            opacity: isInView ? backgroundOpacity : 0,
+          }}
         />
 
         {/* Subtle ambient elements */}
