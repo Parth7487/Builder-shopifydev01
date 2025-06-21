@@ -163,16 +163,19 @@ const ScrollStoryPanel = () => {
         </div>
 
         {/* Progress indicator */}
-        <div className="absolute right-8 top-1/2 transform -translate-y-1/2">
-          <div className="w-px h-24 bg-gray-800">
-            <motion.div
-              className="w-full bg-beige origin-top"
-              style={{
-                scaleY: scrollYProgress,
-              }}
-            />
+        {isInView && (
+          <div className="absolute right-8 top-1/2 transform -translate-y-1/2 z-30">
+            <div className="w-px h-24 bg-gray-800">
+              <motion.div
+                className="w-full bg-beige origin-top"
+                style={{
+                  scaleY: scrollYProgress,
+                  willChange: "transform",
+                }}
+              />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
