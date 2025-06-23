@@ -4,7 +4,7 @@ import ScrollProgress from "../components/ScrollProgress";
 import ElegantNavigation from "../components/sections/ElegantNavigation";
 import ElegantHero from "../components/sections/ElegantHero";
 import ScrollStoryPanel from "../components/sections/ScrollStoryPanel";
-import ElegantServices from "../components/sections/ElegantServices";
+
 import ElegantCaseStudies from "../components/sections/ElegantCaseStudies";
 import About from "../components/sections/About";
 import AnimatedTestimonials from "../components/sections/AnimatedTestimonials";
@@ -57,11 +57,6 @@ const Index = () => {
             {/* Story Panel Section */}
             <div className="relative z-10">
               <ScrollStoryPanel />
-            </div>
-
-            {/* Services Section */}
-            <div id="services" className="relative z-20">
-              <ElegantServices />
             </div>
 
             {/* Work Section */}
