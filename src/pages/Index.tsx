@@ -3,13 +3,7 @@ import Preloader from "../components/Preloader";
 import ScrollProgress from "../components/ScrollProgress";
 import ElegantNavigation from "../components/sections/ElegantNavigation";
 import ElegantHero from "../components/sections/ElegantHero";
-import ScrollStoryPanel from "../components/sections/ScrollStoryPanel";
-
-import ElegantCaseStudies from "../components/sections/ElegantCaseStudies";
-import About from "../components/sections/About";
 import AnimatedTestimonials from "../components/sections/AnimatedTestimonials";
-import EnhancedContact from "../components/sections/EnhancedContact";
-import CinematicFinalCTA from "../components/sections/CinematicFinalCTA";
 import Footer from "../components/sections/Footer";
 
 const Index = () => {
@@ -49,42 +43,16 @@ const Index = () => {
 
           {/* Main content */}
           <main className="relative">
-            {/* Hero Section */}
+            {/* Hero Section - Banner */}
             <div id="hero" className="relative z-20">
               <ElegantHero />
             </div>
 
-            {/* Story Panel Section */}
-            <div className="relative z-10">
-              <ScrollStoryPanel />
-            </div>
-
-            {/* Work Section */}
-            <div id="work" className="relative z-20">
-              <ElegantCaseStudies />
-            </div>
-
-            {/* About Section */}
-            <div id="about" className="relative z-20">
-              <About />
-            </div>
-
-            {/* Testimonials Section */}
+            {/* Clients Section - Testimonials */}
             <div className="relative z-20">
               <AnimatedTestimonials />
             </div>
-
-            {/* Contact Section */}
-            <div id="contact" className="relative z-20">
-              <EnhancedContact />
-            </div>
-
-            {/* Final CTA Section */}
-            <div className="relative z-20">
-              <CinematicFinalCTA />
-            </div>
           </main>
-
           {/* Footer */}
           <Footer />
         </div>
