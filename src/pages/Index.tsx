@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Preloader from "../components/Preloader";
 import ScrollProgress from "../components/ScrollProgress";
 import ElegantNavigation from "../components/sections/ElegantNavigation";
