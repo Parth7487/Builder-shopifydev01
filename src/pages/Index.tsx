@@ -5,6 +5,7 @@ import ElegantNavigation from "../components/sections/ElegantNavigation";
 import ElegantHero from "../components/sections/ElegantHero";
 import AnimatedTestimonials from "../components/sections/AnimatedTestimonials";
 import Footer from "../components/sections/Footer";
+import { VelocityScroll } from "../components/ui/scroll-based-velocity";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
