@@ -54,14 +54,14 @@ const ElegantHero = () => {
       {/* Elegant background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-charcoal/40 to-black subtle-grain" />
 
-      {/* Fluid cursor effect */}
-      <div className="absolute inset-0 z-0">
+      {/* Fluid cursor effect - optimized */}
+      <div className="absolute inset-0 z-0 gpu-accelerated">
         <SplashCursor
-          DENSITY_DISSIPATION={2.5}
-          VELOCITY_DISSIPATION={1.8}
-          SPLAT_FORCE={4000}
-          SPLAT_RADIUS={0.15}
-          COLOR_UPDATE_SPEED={5}
+          DENSITY_DISSIPATION={3.0}
+          VELOCITY_DISSIPATION={2.2}
+          SPLAT_FORCE={3500}
+          SPLAT_RADIUS={0.12}
+          COLOR_UPDATE_SPEED={7}
         />
       </div>
 
