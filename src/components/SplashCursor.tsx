@@ -21,7 +21,6 @@ function SplashCursor({
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Simple fluid-like effect using 2D canvas
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
@@ -32,98 +31,118 @@ function SplashCursor({
       vy: number;
       life: number;
       hue: number;
+      size: number;
     }> = [];
 
+    let animationId: number;
+
     function addParticle(x: number, y: number, force: number = 1) {
-      for (let i = 0; i < 3; i++) {
+      const count = Math.floor(force * 5);
+      for (let i = 0; i < count; i++) {
         particles.push({
-          x: x + (Math.random() - 0.5) * 20,
-          y: y + (Math.random() - 0.5) * 20,
-          vx: (Math.random() - 0.5) * force * 8,
-          vy: (Math.random() - 0.5) * force * 8,
+          x: x + (Math.random() - 0.5) * 30,
+          y: y + (Math.random() - 0.5) * 30,
+          vx: (Math.random() - 0.5) * force * 6,
+          vy: (Math.random() - 0.5) * force * 6,
           life: 1.0,
-          hue: (Date.now() * 0.01 + Math.random() * 60) % 360,
+          hue: (Date.now() * 0.01 + Math.random() * 120) % 360,
+          size: Math.random() * 3 + 2,
         });
       }
     }
 
     function animate() {
-      // Clear with slight fade
-      ctx.fillStyle = "rgba(0, 0, 0, 0.03)";
+      // Clear canvas with fade effect
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Filter out dead particles
-      particles = particles.filter((p) => p.life > 0);
-
-      // Update and draw particles
-      particles.forEach((p) => {
+      // Update particles
+      particles = particles.filter((p) => {
         p.x += p.vx;
         p.y += p.vy;
-        p.life -= 0.008;
-        p.vx *= 0.98;
-        p.vy *= 0.98;
+        p.life -= 0.012;
+        p.vx *= 0.985;
+        p.vy *= 0.985;
 
-        const alpha = p.life * 0.6;
-        const size = p.life * 4;
+        if (p.life <= 0) return false;
 
-        // Create gradient for each particle
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, size);
+        const alpha = p.life * 0.7;
+        const currentSize = p.size * p.life;
+
+        // Create glowing effect
+        const gradient = ctx.createRadialGradient(
+          p.x,
+          p.y,
+          0,
+          p.x,
+          p.y,
+          currentSize * 2,
+        );
         gradient.addColorStop(0, `hsla(${p.hue}, 70%, 60%, ${alpha})`);
-        gradient.addColorStop(1, `hsla(${p.hue}, 70%, 60%, 0)`);
+        gradient.addColorStop(0.5, `hsla(${p.hue}, 60%, 50%, ${alpha * 0.5})`);
+        gradient.addColorStop(1, `hsla(${p.hue}, 50%, 40%, 0)`);
 
         ctx.fillStyle = gradient;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, size, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, currentSize * 2, 0, Math.PI * 2);
         ctx.fill();
+
+        return true;
       });
 
-      requestAnimationFrame(animate);
+      animationId = requestAnimationFrame(animate);
     }
 
     function resizeCanvas() {
       const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * window.devicePixelRatio;
-      canvas.height = rect.height * window.devicePixelRatio;
-      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      canvas.width = rect.width;
+      canvas.height = rect.height;
     }
 
-    // Event listeners on document to capture all mouse movements
-    const handleMouseMove = (e: MouseEvent) => {
+    function handleMouseMove(e: MouseEvent) {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
 
-      // Only add particles if mouse is within canvas bounds
+      // Check if mouse is within canvas bounds
       if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-        addParticle(x, y, 1.5);
+        addParticle(x, y, 1.2);
       }
-    };
+    }
 
-    const handleTouchMove = (e: TouchEvent) => {
+    function handleTouchMove(e: TouchEvent) {
+      e.preventDefault();
       const rect = canvas.getBoundingClientRect();
       const touch = e.touches[0];
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
 
-      // Only add particles if touch is within canvas bounds
       if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
         addParticle(x, y, 1.5);
       }
-    };
+    }
 
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("touchmove", handleTouchMove);
-
+    // Initialize
     resizeCanvas();
-    window.addEventListener("resize", resizeCanvas);
-
-    // Start animation
     animate();
+
+    // Add some initial particles for demo
+    setTimeout(() => {
+      addParticle(canvas.width / 2, canvas.height / 2, 0.5);
+    }, 500);
+
+    // Event listeners
+    window.addEventListener("resize", resizeCanvas);
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("touchmove", handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
       document.removeEventListener("mousemove", handleMouseMove);
       document.removeEventListener("touchmove", handleTouchMove);
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+      }
     };
   }, [
     DENSITY_DISSIPATION,
@@ -136,8 +155,11 @@ function SplashCursor({
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full opacity-60 pointer-events-none"
-      style={{ mixBlendMode: "screen" }}
+      className="absolute inset-0 w-full h-full opacity-50 pointer-events-none"
+      style={{
+        mixBlendMode: "screen",
+        filter: "blur(0.5px)",
+      }}
     />
   );
 }
