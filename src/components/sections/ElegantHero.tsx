@@ -7,6 +7,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { Button } from "@/components/ui/button";
+import SplashCursor from "../SplashCursor";
 
 const ElegantHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -51,6 +52,17 @@ const ElegantHero = () => {
     >
       {/* Elegant background */}
       <div className="absolute inset-0 bg-gradient-to-br from-black via-charcoal/40 to-black subtle-grain" />
+
+      {/* Fluid cursor effect */}
+      <div className="absolute inset-0 z-0">
+        <SplashCursor
+          DENSITY_DISSIPATION={2.5}
+          VELOCITY_DISSIPATION={1.8}
+          SPLAT_FORCE={4000}
+          SPLAT_RADIUS={0.15}
+          COLOR_UPDATE_SPEED={5}
+        />
+      </div>
 
       {/* Subtle ambient background */}
       <motion.div
