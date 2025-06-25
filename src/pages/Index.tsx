@@ -54,6 +54,16 @@ const Index = () => {
               <AnimatedTestimonials />
             </div>
           </main>
+
+          {/* Scroll Velocity Section */}
+          <div className="relative z-20">
+            <VelocityScroll
+              text="Shopify Development • Performance Optimization • Custom Themes • "
+              default_velocity={5}
+              className="text-4xl font-light text-beige"
+            />
+          </div>
+
           {/* Footer */}
           <Footer />
         </div>
