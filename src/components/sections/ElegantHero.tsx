@@ -7,7 +7,7 @@ import {
   useSpring,
 } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import SplashCursor from "../SplashCursor";
+import SplashCursor from "../ui/splash-cursor";
 
 const ElegantHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
