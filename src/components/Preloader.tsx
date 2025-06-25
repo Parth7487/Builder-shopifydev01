@@ -12,7 +12,7 @@ const Preloader = ({ onComplete }: PreloaderProps) => {
   useEffect(() => {
     let animationFrame: number;
     const startTime = Date.now();
-    const duration = 2800;
+    const duration = 1500;
 
     const updateProgress = () => {
       const elapsed = Date.now() - startTime;
