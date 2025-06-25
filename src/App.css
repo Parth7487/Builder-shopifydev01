@@ -95,7 +95,20 @@ button:focus:not(:focus-visible) {
   transform: translateZ(0);
 }
 
-/* Animation performance */
+/* Animation performance optimizations */
+.motion-safe {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+/* Optimize for 60fps animations */
+@media (min-resolution: 120dpi) {
+  * {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Reduce motion for accessibility and performance */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -104,4 +117,10 @@ button:focus:not(:focus-visible) {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* Performance optimizations for large content */
+.large-content {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
 }
