@@ -11,6 +11,64 @@ import { StickyScroll } from "../components/ui/sticky-scroll-reveal";
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const stickyScrollContent = useMemo(
+    () => [
+      {
+        title: "Custom Shopify Theme Development",
+        description:
+          "We create bespoke Shopify themes tailored to your brand identity. Every element is carefully crafted to reflect your unique style while ensuring optimal performance and user experience.",
+        content: (
+          <div className="h-full w-full bg-gradient-to-br from-beige to-clay flex items-center justify-center text-black">
+            <div className="text-center p-8">
+              <div className="text-6xl mb-4">🎨</div>
+              <div className="text-2xl font-medium">Custom Themes</div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: "Performance Optimization",
+        description:
+          "Lightning-fast loading speeds and seamless user interactions. We optimize every aspect of your store to ensure it performs flawlessly across all devices and connection speeds.",
+        content: (
+          <div className="h-full w-full bg-gradient-to-br from-graphite to-charcoal flex items-center justify-center text-white">
+            <div className="text-center p-8">
+              <div className="text-6xl mb-4">⚡</div>
+              <div className="text-2xl font-medium">Speed Optimization</div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: "Advanced Functionality",
+        description:
+          "Custom features and integrations that set your store apart. From complex product configurators to seamless third-party integrations, we bring your vision to life.",
+        content: (
+          <div className="h-full w-full bg-gradient-to-br from-beige/20 to-clay/20 flex items-center justify-center text-beige">
+            <div className="text-center p-8">
+              <div className="text-6xl mb-4">⚙️</div>
+              <div className="text-2xl font-medium">Custom Features</div>
+            </div>
+          </div>
+        ),
+      },
+      {
+        title: "Ongoing Support & Maintenance",
+        description:
+          "Dedicated support to keep your store running smoothly. We provide regular updates, security monitoring, and feature enhancements to ensure your store continues to grow with your business.",
+        content: (
+          <div className="h-full w-full bg-gradient-to-br from-black to-charcoal flex items-center justify-center text-beige">
+            <div className="text-center p-8">
+              <div className="text-6xl mb-4">🛡️</div>
+              <div className="text-2xl font-medium">24/7 Support</div>
+            </div>
+          </div>
+        ),
+      },
+    ],
+    [],
+  );
+
   useEffect(() => {
     // Set dark mode by default for the landing page
     document.documentElement.classList.add("dark");
