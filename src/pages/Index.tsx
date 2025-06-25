@@ -56,6 +56,11 @@ const Index = () => {
             </div>
           </main>
 
+          {/* Sticky Scroll Reveal Section */}
+          <div className="relative z-20">
+            <StickyScroll content={stickyScrollContent} />
+          </div>
+
           {/* Scroll Velocity Section */}
           <div className="relative z-20 gpu-accelerated">
             <VelocityScroll
