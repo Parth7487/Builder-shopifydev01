@@ -50,7 +50,7 @@ const Index = () => {
             </div>
 
             {/* Clients Section - Testimonials */}
-            <div className="relative z-20">
+            <div className="relative z-20 large-content">
               <AnimatedTestimonials />
             </div>
           </main>
