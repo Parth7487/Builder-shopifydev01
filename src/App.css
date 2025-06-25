@@ -13,11 +13,14 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Scroll performance optimizations */
 body {
   overflow-x: hidden;
+  contain: layout style paint;
 }
 
 /* Improve scroll performance for sections with animations */
