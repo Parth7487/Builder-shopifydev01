@@ -6,6 +6,7 @@ import ElegantHero from "../components/sections/ElegantHero";
 import AnimatedTestimonials from "../components/sections/AnimatedTestimonials";
 import Footer from "../components/sections/Footer";
 import { VelocityScroll } from "../components/ui/scroll-based-velocity";
+import { StickyScroll } from "../components/ui/sticky-scroll-reveal";
 
 const Index = () => {
   const [isLoaded, setIsLoaded] = useState(false);
