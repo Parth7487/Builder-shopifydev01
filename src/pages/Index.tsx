@@ -56,11 +56,11 @@ const Index = () => {
           </main>
 
           {/* Scroll Velocity Section */}
-          <div className="relative z-20">
+          <div className="relative z-20 gpu-accelerated">
             <VelocityScroll
               text="Shopify Development • Performance Optimization • Custom Themes • "
-              default_velocity={5}
-              className="text-4xl font-light text-beige"
+              default_velocity={3}
+              className="text-4xl font-light text-beige motion-safe"
             />
           </div>
 
