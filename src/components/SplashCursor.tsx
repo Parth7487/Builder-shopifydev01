@@ -87,30 +87,32 @@ function SplashCursor({
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     }
 
-    // Event listeners
-    canvas.addEventListener("mousemove", (e) => {
+    // Event listeners on document to capture all mouse movements
+    const handleMouseMove = (e: MouseEvent) => {
       const rect = canvas.getBoundingClientRect();
       const x = e.clientX - rect.left;
       const y = e.clientY - rect.top;
-      addParticle(x, y, 1.5);
-    });
 
-    canvas.addEventListener("mouseenter", (e) => {
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      addParticle(x, y, 2);
-    });
+      // Only add particles if mouse is within canvas bounds
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        addParticle(x, y, 1.5);
+      }
+    };
 
-    // Touch events for mobile
-    canvas.addEventListener("touchmove", (e) => {
-      e.preventDefault();
+    const handleTouchMove = (e: TouchEvent) => {
       const rect = canvas.getBoundingClientRect();
       const touch = e.touches[0];
       const x = touch.clientX - rect.left;
       const y = touch.clientY - rect.top;
-      addParticle(x, y, 1.5);
-    });
+
+      // Only add particles if touch is within canvas bounds
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        addParticle(x, y, 1.5);
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("touchmove", handleTouchMove);
 
     resizeCanvas();
     window.addEventListener("resize", resizeCanvas);
@@ -120,6 +122,8 @@ function SplashCursor({
 
     return () => {
       window.removeEventListener("resize", resizeCanvas);
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("touchmove", handleTouchMove);
     };
   }, [
     DENSITY_DISSIPATION,
@@ -132,7 +136,7 @@ function SplashCursor({
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 w-full h-full opacity-40 pointer-events-auto"
+      className="absolute inset-0 w-full h-full opacity-60 pointer-events-none"
       style={{ mixBlendMode: "screen" }}
     />
   );
